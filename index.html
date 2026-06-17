@@ -298,53 +298,108 @@
         }
 
         /* Responsive design */
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .glass-container {
-                padding: 30px 20px;
-                max-width: 95%;
+                padding: 25px 18px;
+                max-width: 320px;
+            }
+
+            .profile-image {
+                width: 90px;
+                height: 90px;
+                margin-bottom: 15px;
             }
 
             .name {
-                font-size: 24px;
+                font-size: 22px;
+                letter-spacing: 3px;
+                width: 5ch;
+                margin-bottom: 12px;
             }
 
             .bio {
-                font-size: 13px;
+                font-size: 12px;
+                margin-bottom: 18px;
             }
 
             .link-btn {
-                padding: 12px 16px;
-                font-size: 14px;
+                padding: 10px 16px;
+                font-size: 13px;
+                gap: 6px;
+            }
+
+            .links-container {
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .glass-container {
+                padding: 20px 15px;
+                max-width: 85vw;
+            }
+
+            .profile-image {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 12px;
+            }
+
+            .name {
+                font-size: 20px;
+                letter-spacing: 2px;
+                width: 5ch;
+                margin-bottom: 10px;
+            }
+
+            .bio {
+                font-size: 11px;
+                margin-bottom: 15px;
+                line-height: 1.4;
+            }
+
+            .link-btn {
+                padding: 9px 14px;
+                font-size: 12px;
+                gap: 5px;
+            }
+
+            .links-container {
+                gap: 7px;
             }
         }
 
         @media (max-width: 360px) {
             .glass-container {
-                padding: 25px 15px;
+                padding: 18px 12px;
+                max-width: 90vw;
             }
 
             .profile-image {
-                width: 100px;
-                height: 100px;
+                width: 70px;
+                height: 70px;
+                margin-bottom: 10px;
             }
 
             .name {
-                font-size: 22px;
-                margin-bottom: 6px;
+                font-size: 18px;
+                letter-spacing: 1px;
+                width: 5ch;
+                margin-bottom: 8px;
             }
 
             .bio {
-                font-size: 12px;
-                margin-bottom: 20px;
-            }
-
-            .links-container {
-                gap: 10px;
+                font-size: 10px;
+                margin-bottom: 12px;
             }
 
             .link-btn {
-                padding: 11px 14px;
-                font-size: 13px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+
+            .links-container {
+                gap: 6px;
             }
         }
 
