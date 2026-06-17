@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AFFLY - Link in Bio</title>
+    <title>Link in Bio</title>
     <style>
         * {
             margin: 0;
@@ -21,32 +21,11 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1a3e 25%, #2d1b4e 50%, #1a0a2e 75%, #0f0f1e 100%);
+            background: #000;
             overflow-x: hidden;
             position: relative;
-            scroll-behavior: smooth;
-        }
-
-        /* Animated gradient background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(138, 43, 226, 0.1), rgba(59, 130, 246, 0.1), rgba(236, 72, 153, 0.1));
-            animation: gradientShift 15s ease infinite;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
         }
 
         /* Background video styling */
@@ -58,54 +37,18 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            opacity: 0.6;
         }
 
-        /* Mouse tracking light effect */
-        #mouseLight {
+        /* Dark overlay for better readability */
+        body::before {
+            content: '';
             position: fixed;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.2) 0%, rgba(138, 43, 226, 0) 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            filter: blur(80px);
-            display: none;
-        }
-
-        /* Particle system */
-        .particle {
-            position: fixed;
-            pointer-events: none;
-            z-index: 2;
-            border-radius: 50%;
-        }
-
-        /* Dark mode toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: rgba(138, 43, 226, 0.2);
-            border: 1px solid rgba(138, 43, 226, 0.3);
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            z-index: 100;
-            backdrop-filter: blur(8px);
-        }
-
-        .theme-toggle:hover {
-            background: rgba(138, 43, 226, 0.4);
-            transform: scale(1.1);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
         }
 
         /* Full-screen typewriter overlay */
@@ -134,26 +77,25 @@
             font-size: 24px;
             letter-spacing: 0.2em;
             text-transform: uppercase;
-            animation: pulse 1s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
 
-        /* Main container */
-        .container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 600px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
+        /* Glass container */
+        .glass-container {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(138, 43, 226, 0.18);
+            border-radius: 30px;
+            padding: 40px 30px;
+            width: 90%;
+            max-width: 380px;
+            box-shadow: 0 0 50px rgba(138, 43, 226, 0.2);
+            text-align: center;
             animation: slideUp 0.6s ease-out;
+            transform-style: preserve-3d;
+            transition: transform 0.05s ease-out;
+            will-change: transform;
         }
 
         @keyframes slideUp {
@@ -167,130 +109,59 @@
             }
         }
 
-        /* Glass container */
-        .glass-container {
-            background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            border-radius: 40px;
-            padding: 50px 40px;
-            width: 100%;
-            box-shadow: 0 0 60px rgba(138, 43, 226, 0.15), inset 0 0 30px rgba(138, 43, 226, 0.05);
-            text-align: center;
-            transform-style: preserve-3d;
-            transition: all 0.3s ease;
-        }
-
-        .glass-container:hover {
-            box-shadow: 0 0 80px rgba(138, 43, 226, 0.25), inset 0 0 40px rgba(138, 43, 226, 0.1);
-        }
-
         /* Profile picture */
         .profile-image {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
             display: block;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
             object-fit: cover;
-            border: 3px solid rgba(138, 43, 226, 0.5);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4), 0 10px 40px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.8s ease-out 0.2s both, float 3s ease-in-out infinite 0.5s;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease-out 0.2s both;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        /* Animated gradient name */
+        /* Name heading */
         .name {
-            font-size: 48px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #8a2be2, #3b82f6, #ec4899, #8a2be2);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 32px;
+            font-weight: 300;
+            color: #fff;
             text-align: center;
             text-transform: uppercase;
-            letter-spacing: 8px;
-            margin: 0 auto 15px;
-            animation: textFlow 4s ease infinite, nameGlow 0.3s ease;
-            filter: drop-shadow(0 0 10px rgba(138, 43, 226, 0.3));
+            letter-spacing: 6px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid rgba(255, 255, 255, 0.8);
+            width: 6ch;
+            margin: 0 auto 20px;
+            animation: typewriterName 2s steps(5) 0.5s forwards, blink 0.75s step-end infinite;
         }
 
-        @keyframes textFlow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        @keyframes typewriterName {
+            from { width: 0; }
+            to { width: 6ch; }
         }
 
-        @keyframes nameGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(138, 43, 226, 0.3); }
-            50% { text-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
-        }
-
-        /* Stats section */
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 15px;
-            margin: 30px 0;
-            width: 100%;
-        }
-
-        .stat-item {
-            background: rgba(138, 43, 226, 0.1);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            border-radius: 15px;
-            padding: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .stat-item:hover {
-            background: rgba(138, 43, 226, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(138, 43, 226, 0.2);
-        }
-
-        .stat-number {
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(45deg, #8a2be2, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: countUp 2s ease-out forwards;
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
-            margin-top: 5px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        @keyframes countUp {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes blink {
+            50% { border-color: transparent; }
         }
 
         /* Bio text */
         .bio {
-            font-size: 15px;
+            font-size: 14px;
             color: rgba(255, 255, 255, 0.85);
             text-align: center;
-            margin: 20px 0;
+            margin-bottom: 30px;
             line-height: 1.6;
             animation: fadeIn 0.8s ease-out 0.4s both;
         }
@@ -300,57 +171,112 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            width: 100%;
-            margin-top: 25px;
         }
 
-        /* Enhanced link button styling */
+        /* Link button styling */
         .link-btn {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 16px 24px;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(59, 130, 246, 0.1));
-            border: 1.5px solid rgba(138, 43, 226, 0.3);
-            border-radius: 50px;
-            color: #fff;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            position: relative;
-            overflow: hidden;
-            animation: slideInButton 0.6s ease-out backwards;
-        }
-
-        .link-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .link-btn:hover::before {
-            left: 100%;
+            padding: 14px 20px;
+                background: transparent;
+                border: 1px solid rgba(138, 43, 226, 0.15);
+                border-radius: 50px;
+                color: #fff;
+                font-size: 15px;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                transition: transform 0.2s ease, text-shadow 0.2s ease;
         }
 
         .link-btn:hover {
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2), rgba(59, 130, 246, 0.2));
+            background: transparent;
             color: #fff;
-            transform: translateY(-3px) scale(1.02);
-            border-color: rgba(138, 43, 226, 0.6);
-            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4), 0 8px 30px rgba(0, 0, 0, 0.2);
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+            transform: scale(1.02);
+            text-shadow: 0 0 8px rgba(138, 43, 226, 0.8);
+            border-color: rgba(138, 43, 226, 0.3);
+            box-shadow: 0 0 35px rgba(138, 43, 226, 0.3), 0 12px 28px rgba(0, 0, 0, 0.18);
         }
 
         .link-btn:active {
-            transform: translateY(-1px) scale(0.98);
+            transform: translateY(0);
+        }
+
+        .petal-container {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .petal-stack {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 120px;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .cherry-blossom {
+            position: absolute;
+            top: -60px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.95;
+            animation: bubbleFall linear forwards;
+            pointer-events: auto;
+            cursor: pointer;
+            filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.4));
+        }
+
+        .stack-blossom {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            opacity: 0.85;
+            pointer-events: auto;
+            cursor: pointer;
+            filter: drop-shadow(0 0 6px rgba(138, 43, 226, 0.3));
+        }
+
+        @keyframes bubbleFall {
+            to {
+                transform: translate3d(0, 120vh, 0) scale(1.1);
+                opacity: 0.3;
+            }
+        }
+
+        @keyframes popBubble {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.15);
+            }
+            100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Glow styling */
+        .name,
+        .bio,
+        .overlay-text,
+        .link-btn {
+            text-shadow: 0 0 20px rgba(102, 126, 234, 0.25);
+        }
+
+        /* Animation for buttons */
+        .link-btn {
+            animation: slideInButton 0.6s ease-out backwards;
         }
 
         .link-btn:nth-child(1) { animation-delay: 0.5s; }
@@ -371,92 +297,15 @@
             }
         }
 
-        /* Social icons grid */
-        .social-icons {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 25px;
-            width: 100%;
-        }
-
-        .social-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(138, 43, 226, 0.1);
-            border: 1px solid rgba(138, 43, 226, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 22px;
-            transition: all 0.3s ease;
-            margin: 0 auto;
-        }
-
-        .social-icon:hover {
-            background: rgba(138, 43, 226, 0.3);
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.4);
-        }
-
-        /* Petal animation */
-        .petal-container {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .petal-stack {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 120px;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        /* Footer */
-        .footer {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 50;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 12px;
-        }
-
-        .footer a {
-            color: rgba(138, 43, 226, 0.6);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: rgba(138, 43, 226, 1);
-        }
-
         /* Responsive design */
         @media (max-width: 480px) {
             .glass-container {
                 padding: 30px 20px;
+                max-width: 95%;
             }
 
             .name {
-                font-size: 36px;
-                letter-spacing: 4px;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-                gap: 10px;
+                font-size: 24px;
             }
 
             .bio {
@@ -467,15 +316,36 @@
                 padding: 12px 16px;
                 font-size: 14px;
             }
-
-            #mouseLight {
-                width: 200px;
-                height: 200px;
-            }
         }
 
-        body.dark-mode {
-            background: linear-gradient(135deg, #000000 0%, #0a0a0a 25%, #1a0a2e 50%, #0a0a0a 75%, #000000 100%);
+        @media (max-width: 360px) {
+            .glass-container {
+                padding: 25px 15px;
+            }
+
+            .profile-image {
+                width: 100px;
+                height: 100px;
+            }
+
+            .name {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+
+            .bio {
+                font-size: 12px;
+                margin-bottom: 20px;
+            }
+
+            .links-container {
+                gap: 10px;
+            }
+
+            .link-btn {
+                padding: 11px 14px;
+                font-size: 13px;
+            }
         }
 
     </style>
@@ -485,108 +355,65 @@
         <source src="pop.mp4" type="audio/mp4">
     </audio>
 
-    <!-- Background video -->
+    <!-- Background video with audio baked into bg.mp4 -->
     <video id="bgVideo" autoplay muted playsinline loop>
         <source src="bg.mp4" type="video/mp4">
+        Your browser does not support the video element.
     </video>
 
-    <!-- Mouse tracking light -->
-    <div id="mouseLight"></div>
-
-    <!-- Particles -->
     <div class="petal-container" id="petalContainer"></div>
     <div class="petal-stack" id="petalStack"></div>
-
-    <!-- Theme toggle -->
-    <div class="theme-toggle" id="themeToggle">🌙</div>
 
     <!-- Full-screen landing overlay -->
     <div id="splashScreen">
         <div class="overlay-text">Click to enter...</div>
     </div>
 
-    <!-- Main container -->
-    <div class="container">
-        <!-- Glass container with content -->
-        <div class="glass-container" id="glassContainer">
-            <!-- Profile picture -->
-            <img src="pfp.jpg" alt="Profile Picture" class="profile-image">
+    <!-- Glass container with content -->
+    <div class="glass-container" id="glassContainer">
+        <!-- Profile picture -->
+        <img src="pfp.jpg" alt="Profile Picture" class="profile-image">
 
-            <!-- Animated gradient name -->
-            <h1 class="name">AFFLY</h1>
+        <!-- Name -->
+        <h1 class="name">AFFLY</h1>
 
-            <!-- Stats section -->
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" data-target="2.4">0</div>
-                    <div class="stat-label">Projects</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="15.8">0</div>
-                    <div class="stat-label">K Followers</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" data-target="99">0</div>
-                    <div class="stat-label">Happy Clients</div>
-                </div>
-            </div>
+        <!-- Bio -->
+        <p class="bio">Trying to survive another boring day...</p>
 
-            <!-- Bio -->
-            <p class="bio">Trying to survive another boring day... 🎨✨</p>
-
-            <!-- Links container -->
-            <div class="links-container">
-                <a href="https://instagram.com" target="_blank" class="link-btn">
-                    📸 Instagram
-                </a>
-                <a href="https://linkedin.com" target="_blank" class="link-btn">
-                    💼 LinkedIn
-                </a>
-                <a href="https://discord.com" target="_blank" class="link-btn">
-                    🎮 Discord
-                </a>
-                <a href="https://twitter.com" target="_blank" class="link-btn">
-                    🐦 Twitter
-                </a>
-                <a href="mailto:your.email@example.com" class="link-btn">
-                    ✉️ Email
-                </a>
-                <a href="https://your-portfolio.com" target="_blank" class="link-btn">
-                    🚀 Portfolio
-                </a>
-            </div>
-
-            <!-- Social icons -->
-            <div class="social-icons">
-                <div class="social-icon" onclick="window.open('https://github.com')">🐙</div>
-                <div class="social-icon" onclick="window.open('https://youtube.com')">▶️</div>
-                <div class="social-icon" onclick="window.open('https://tiktok.com')">🎵</div>
-            </div>
+        <!-- Links container -->
+        <div class="links-container">
+            <a href="https://instagram.com" target="_blank" class="link-btn">
+                Instagram
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="link-btn">
+                LinkedIn
+            </a>
+            <a href="https://discord.com" target="_blank" class="link-btn">
+                Discord
+            </a>
+            <a href="https://twitter.com" target="_blank" class="link-btn">
+                Twitter
+            </a>
+            <a href="mailto:your.email@example.com" class="link-btn">
+                Email
+            </a>
+            <a href="https://your-portfolio.com" target="_blank" class="link-btn">
+                Portfolio
+            </a>
         </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>Made with ✨ by <a href="https://github.com/afflicarious">@afflicarious</a></p>
     </div>
 
     <script>
         const splashScreen = document.getElementById('splashScreen');
         const video = document.getElementById('bgVideo');
         const glassContainer = document.getElementById('glassContainer');
-        const mouseLight = document.getElementById('mouseLight');
-        const themeToggle = document.getElementById('themeToggle');
-        const petalContainer = document.getElementById('petalContainer');
-        const petalStack = document.getElementById('petalStack');
         let started = false;
 
-        // Enter app function
         function enterApp() {
             splashScreen.classList.add('hidden');
             if (!started) {
                 video.muted = false;
                 video.play().catch(err => console.log('Play error:', err));
-                mouseLight.style.display = 'block';
                 started = true;
             }
         }
@@ -597,7 +424,8 @@
             }
         });
 
-        // Audio context
+        const petalContainer = document.getElementById('petalContainer');
+        const petalStack = document.getElementById('petalStack');
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playPopSound() {
@@ -620,144 +448,143 @@
             source.start();
         }
 
-        // Mouse tracking light effect
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 20 + 5;
+            const left = Math.random() * 90 + 5;
+            const duration = Math.random() * 4 + 4;
+            const delay = Math.random() * 3;
+            petal.style.width = `${size}px`;
+            petal.style.height = `${size}px`;
+            petal.style.left = `${left}vw`;
+            petal.style.animationDuration = `${duration}s`;
+            petal.style.animationDelay = `${delay}s`;
+            petal.style.opacity = 0;
+            petal.style.transition = 'opacity 0.2s ease';
+            petal.addEventListener('animationstart', () => petal.style.opacity = 0.75);
+            petal.addEventListener('click', () => {
+                petal.remove();
+                playPopSound();
+            });
+            petal.addEventListener('touchstart', () => {
+                petal.remove();
+                playPopSound();
+            });
+            petal.addEventListener('animationend', () => {
+                const stackPetal = document.createElement('div');
+                stackPetal.className = 'stack-petal';
+                stackPetal.style.width = `${size}px`;
+                stackPetal.style.height = `${size}px`;
+                stackPetal.style.left = `${left}vw`;
+                stackPetal.style.bottom = '0';
+                stackPetal.style.transform = `translateY(-${Math.random() * 20}px) rotate(${Math.random() * 360}deg)`;
+                petalStack.appendChild(stackPetal);
+                if (petalStack.childElementCount > 80) {
+                    petalStack.removeChild(petalStack.firstChild);
+                }
+                petal.remove();
+            });
+            petalContainer.appendChild(petal);
+        }
+
+        setInterval(() => {
+            if (petalContainer.childElementCount < 24) {
+                createPetal();
+            }
+        }, 250);
+
+        document.addEventListener('touchstart', (event) => {
+            const { clientX, clientY } = event.touches[0];
+            const edgeSize = 80;
+            const isCorner = (
+                (clientX < edgeSize && clientY < edgeSize) ||
+                (clientX > window.innerWidth - edgeSize && clientY < edgeSize) ||
+                (clientX < edgeSize && clientY > window.innerHeight - edgeSize) ||
+                (clientX > window.innerWidth - edgeSize && clientY > window.innerHeight - edgeSize)
+            );
+            if (isCorner) {
+                playPopSound();
+            }
+        });
+
+        document.addEventListener('click', (event) => {
+            const { clientX, clientY } = event;
+            const edgeSize = 80;
+            const isCorner = (
+                (clientX < edgeSize && clientY < edgeSize) ||
+                (clientX > window.innerWidth - edgeSize && clientY < edgeSize) ||
+                (clientX < edgeSize && clientY > window.innerHeight - edgeSize) ||
+                (clientX > window.innerWidth - edgeSize && clientY > window.innerHeight - edgeSize)
+            );
+            if (isCorner) {
+                playPopSound();
+            }
+        });
+
+        // ===== MAGNETIC BUTTON EFFECT =====
+        const buttons = document.querySelectorAll('.link-btn');
+        const magneticStrength = 30; // Pixels to move towards cursor
+
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX;
             const mouseY = e.clientY;
 
-            mouseLight.style.left = (mouseX - 200) + 'px';
-            mouseLight.style.top = (mouseY - 200) + 'px';
+            buttons.forEach(button => {
+                const rect = button.getBoundingClientRect();
+                const buttonX = rect.left + rect.width / 2;
+                const buttonY = rect.top + rect.height / 2;
 
-            // Tilt effect
-            const windowCenterX = window.innerWidth / 2;
-            const windowCenterY = window.innerHeight / 2;
-            const rotateX = (mouseY - windowCenterY) / 50;
-            const rotateY = -(mouseX - windowCenterX) / 50;
+                const distance = Math.sqrt(
+                    Math.pow(mouseX - buttonX, 2) + Math.pow(mouseY - buttonY, 2)
+                );
+
+                if (distance < 100) {
+                    const angle = Math.atan2(mouseY - buttonY, mouseX - buttonX);
+                    const moveX = Math.cos(angle) * magneticStrength * (1 - distance / 100);
+                    const moveY = Math.sin(angle) * magneticStrength * (1 - distance / 100);
+
+                    button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                } else {
+                    button.style.transform = 'translate(0, 0)';
+                }
+            });
+        });
+
+        // ===== TILT EFFECT FOR GLASS CONTAINER =====
+        let mouseX = 0;
+        let mouseY = 0;
+        const tiltStrength = 25; // Max rotation degrees
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+
+            const rotateX = -mouseY * tiltStrength;
+            const rotateY = mouseX * tiltStrength;
 
             glassContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
+        // Reset tilt when mouse leaves window
         document.addEventListener('mouseleave', () => {
             glassContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
         });
 
-        // Particle creation
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            const size = Math.random() * 8 + 3;
-            const left = Math.random() * 100;
-            const duration = Math.random() * 3 + 2;
-            const delay = Math.random() * 2;
+        // Touch support for mobile devices
+        document.addEventListener('touchmove', (e) => {
+            const touch = e.touches[0];
+            mouseX = (touch.clientX / window.innerWidth - 0.5) * 2;
+            mouseY = (touch.clientY / window.innerHeight - 0.5) * 2;
 
-            particle.style.width = size + 'px';
-            particle.style.height = size + 'px';
-            particle.style.left = left + 'vw';
-            particle.style.top = '-10px';
-            particle.style.background = `rgba(138, 43, 226, ${Math.random() * 0.5 + 0.3})`;
-            particle.style.boxShadow = `0 0 ${size * 2}px rgba(138, 43, 226, 0.6)`;
-            particle.style.animation = `fall ${duration}s linear forwards`;
-            particle.style.animationDelay = delay + 's';
+            const rotateX = -mouseY * tiltStrength;
+            const rotateY = mouseX * tiltStrength;
 
-            petalContainer.appendChild(particle);
-
-            setTimeout(() => particle.remove(), (duration + delay) * 1000);
-        }
-
-        // Add fall animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes fall {
-                to {
-                    transform: translateY(100vh) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        setInterval(() => {
-            if (petalContainer.children.length < 20) {
-                createParticle();
-            }
-        }, 300);
-
-        // Particle on click
-        document.addEventListener('click', (e) => {
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    const size = Math.random() * 6 + 2;
-                    particle.style.width = size + 'px';
-                    particle.style.height = size + 'px';
-                    particle.style.left = e.clientX + 'px';
-                    particle.style.top = e.clientY + 'px';
-                    particle.style.background = `rgba(138, 43, 226, ${Math.random() * 0.8})`;
-                    particle.style.boxShadow = `0 0 ${size * 3}px rgba(138, 43, 226, 0.8)`;
-                    particle.style.pointerEvents = 'none';
-                    particle.style.animation = `burst ${Math.random() * 0.8 + 0.5}s ease-out forwards`;
-
-                    petalContainer.appendChild(particle);
-                    playPopSound();
-                    setTimeout(() => particle.remove(), 1000);
-                }, i * 50);
-            }
+            glassContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
 
-        // Burst animation
-        const burstStyle = document.createElement('style');
-        burstStyle.textContent = `
-            @keyframes burst {
-                to {
-                    transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(burstStyle);
-
-        // Dark mode toggle
-        let isDarkMode = false;
-        themeToggle.addEventListener('click', () => {
-            isDarkMode = !isDarkMode;
-            document.body.classList.toggle('dark-mode');
-            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
-            playPopSound();
-        });
-
-        // Counter animation
-        function animateCounters() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(el => {
-                const target = parseFloat(el.dataset.target);
-                let current = 0;
-                const increment = target / 100;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        el.textContent = target + 'K';
-                        clearInterval(timer);
-                    } else {
-                        el.textContent = current.toFixed(1);
-                    }
-                }, 20);
-            });
-        }
-
-        // Auto-enter after 3 seconds
-        setTimeout(() => {
-            if (!splashScreen.classList.contains('hidden')) {
-                enterApp();
-                animateCounters();
-            }
-        }, 3000);
-
-        splashScreen.addEventListener('click', () => {
-            if (!splashScreen.classList.contains('hidden')) {
-                enterApp();
-                animateCounters();
-            }
+        document.addEventListener('touchend', () => {
+            glassContainer.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
         });
     </script>
 </body>
